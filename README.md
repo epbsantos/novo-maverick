@@ -1,5 +1,5 @@
 # novo-maverick
-Novo front para o site (maverick.td.utfpr.edu.br)[[http](http://maverick.td.utfpr.edu.br/)]
+Novo front para o site [maverick.td.utfpr.edu.br](http://maverick.td.utfpr.edu.br/)
 
 Algumas idéias:
 - Focar nas disciplinas front 1 e 2, ihc e design;

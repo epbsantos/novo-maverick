@@ -8,4 +8,5 @@ Algumas idéias:
 - Links, (tcc, jardimweb, moodle)
 - Tema claro/escupo
 - Responsivo
+- Front com seletor com vários frameworks (sem css, bootstrap, tailwind, pico, beer, etc...)
 - Sugestões?

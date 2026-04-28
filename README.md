@@ -10,3 +10,23 @@ Algumas idéias:
 - Responsivo
 - Front com seletor com vários frameworks (sem css, bootstrap, tailwind, pico, beer, etc...)
 - Sugestões?
+
+
+## front1
+- html
+- css
+- bootstrap
+- edição de imagem
+
+## front2
+- js
+- gsap
+- react
+
+## design
+- figma
+- cursor
+
+## ihc
+- teoria
+- teste de usabilidade

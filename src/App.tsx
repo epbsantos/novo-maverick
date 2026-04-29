@@ -1,11 +1,15 @@
-
+import Menu from "./components/Menu"
+import text from "./constants/text"
 
 function App() {
   
 
   return (
     <>
-      <h1>Novo Maverick</h1>
+      <Menu></Menu>
+      
+      <h1>{text.title}</h1>
+      <h2>{text.subtitle}</h2>
     </>
   )
 }

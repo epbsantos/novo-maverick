@@ -1,4 +1,4 @@
-var menu = {
+const menu = {
     //link1_name: "Home",
     //link1_url: "#",
     

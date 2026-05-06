@@ -2,8 +2,17 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { SplitText } from "gsap/all";
 
+import { Link, Routes, Route } from "react-router";
+import Front1 from './components/front1/Front1.tsx'
+import Html from './components/front1/Html.tsx'
+
+
 import Menu from "./components/Menu";
 import text from "./constants/text";
+
+
+
+//import Front1 from "./components/front1/Front1";
 
 function App() {
   useGSAP(() => {
@@ -18,14 +27,14 @@ function App() {
     gsap.from(h1.chars, {
       yPercent: 100,
       duration: 1.8,
-      ease: "expo.out",
+      ease: "elastic",
       stagger: 0.06,
     });
 
     gsap.from(h2.chars, {
       yPercent: 100,
       duration: 1.2,
-      ease: "expo.out",
+      ease: "elastic",
       stagger: 0.06,
     });
 
@@ -41,6 +50,7 @@ function App() {
       x: -350,
       ease: "elastic",
       duration: 2,
+      stagger: 0.5
     });
   });
 
@@ -56,9 +66,9 @@ function App() {
 
         <div className="disciplines">
           <div className="discipline">
-            <h3>front1</h3>
+            <h3> <Link to="front1">front1</Link> </h3>
             <ul>
-              <li>html</li>
+              <li><Link to="front1/html">html</Link></li>
               <li>css</li>
               <li>bootstrap</li>
               <li>edição de imagem</li>
@@ -90,6 +100,13 @@ function App() {
             </ul>
           </div>
         </div>
+      </section>
+
+      <section>
+        <Routes>
+          <Route path="/front1" element={<Front1 />} />
+          <Route path="/front1/html" element={<Html />} />
+        </Routes>
       </section>
     </>
   );

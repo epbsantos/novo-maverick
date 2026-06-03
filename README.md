@@ -1,0 +1,38 @@
+
+# Para rodar o projeto, comandos no terminal:
+    npm install
+    npm run dev
+
+
+# novo-maverick
+Novo front para o site [maverick.td.utfpr.edu.br](http://maverick.td.utfpr.edu.br/)
+
+Algumas idéias:
+- Focar nas disciplinas front 1 e 2, ihc e design;
+- Focar no início da vida acadêmica;
+- **Usar o GSAP** para cada tipo de parte - qual o efeito que encaixa em tal parte??
+- Links, (tcc, jardimweb, moodle)
+- Tema claro/escupo
+- Responsivo
+- Front com seletor com vários frameworks (sem css, bootstrap, tailwind, pico, beer, etc...)
+- Sugestões?
+
+
+## front1
+- html
+- css
+- bootstrap
+- edição de imagem
+
+## front2
+- js
+- gsap
+- react
+
+## design
+- figma
+- cursor
+
+## ihc
+- teoria
+- teste de usabilidade

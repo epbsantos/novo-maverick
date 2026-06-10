@@ -25,6 +25,7 @@ import Teoria from "./components/ihc/Teoria.tsx";
 import Teste from "./components/ihc/Teste.tsx";
 import Heuristica from "./components/ihc/Heuristica.tsx";
 
+
 import { useState } from 'react';
 
 function App() {
@@ -158,6 +159,7 @@ function App() {
             <Route path="/ihc" element={<Ihc />} />
             <Route path="/ihc/teoria" element={<Teoria />} />
             <Route path="/ihc/teste" element={<Teste />} />
+            <Route path="/ihc/heuristica" element={<Heuristica />} />
 
 
           </Routes>

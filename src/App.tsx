@@ -1,7 +1,7 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { SplitText } from "gsap/all";
-import { Link, Routes, Route } from "react-router";
+import { Link, Routes, Route, useLocation } from "react-router";
 
 import Menu from "./components/Menu";
 import text from "./constants/text";
@@ -35,6 +35,15 @@ import { useState, useEffect } from 'react';
 function App() {
   const [tema, setTema] = useState<'claro' | 'escuro' | 'maverick'>('claro');
   const [visible, setVisible] = useState(false);
+
+  // ---- NOVO: busca/filtro no menu lateral ----
+  const [busca, setBusca] = useState('');
+  const filtroAtivo = busca.trim().toLowerCase();
+  const bate = (texto: string) => texto.toLowerCase().includes(filtroAtivo);
+
+  // ---- NOVO: detectar página ativa no menu ----
+  const location = useLocation();
+  const isActive = (path: string) => location.pathname === `/${path}` || location.pathname === path;
 
   useGSAP(() => {
     const h1 = new SplitText("h1", {
@@ -125,47 +134,64 @@ function App() {
 
           <Menu />
 
-          <div className="disciplines">
+          {/* NOVO: campo de busca/filtro do menu */}
+          <div style={{ marginTop: '16px', marginBottom: '8px' }}>
+            <input
+              type="text"
+              placeholder="Buscar disciplina..."
+              value={busca}
+              onChange={(e) => setBusca(e.target.value)}
+              style={{ padding: '6px', width: '100%', borderRadius: '4px' }}
+            />
+          </div>
+
+          <div className="disciplines" style={{ display: bate('slides') ? 'block' : 'none' }}>
             <div className="discipline slides">
-              <h3 className="HoverCor"> <Link to="slides">Slides</Link> </h3>
+              <h3 className={`HoverCor ${isActive('slides') ? 'active' : ''}`}> <Link to="slides">Slides</Link> </h3>
             </div>
           </div>
 
-          <div className="disciplines">
+          <div
+            className="disciplines"
+            style={{
+              display: ['front1', 'html', 'css', 'bootstrap', 'tailwind', 'imagem'].some(bate) ? 'block' : 'none'
+            }}
+          >
             <div className="discipline front1">
-              <h3 className="HoverCor"> <Link to="front1">Front 1</Link> </h3>
+              <h3 className={`HoverCor ${isActive('front1') ? 'active' : ''}`}> <Link to="front1">Front 1</Link> </h3>
               <ul>
-                <li className="HoverCor"><Link to="front1/html">HTML</Link></li>
-                <li className="HoverCor"><Link to="front1/css">CSS</Link></li>
-                <li className="HoverCor"><Link to="front1/bootstrap">Bootstrap</Link></li>
-                <li className="HoverCor"><Link to="front1/tailwind">Tailwind CSS</Link></li>
-                <li className="HoverCor"><Link to="front1/img">Edição de imagem</Link></li>
+                <li className={`HoverCor ${isActive('front1/html') ? 'active' : ''}`}><Link to="front1/html">HTML</Link></li>
+                <li className={`HoverCor ${isActive('front1/css') ? 'active' : ''}`}><Link to="front1/css">CSS</Link></li>
+                <li className={`HoverCor ${isActive('front1/bootstrap') ? 'active' : ''}`}><Link to="front1/bootstrap">Bootstrap</Link></li>
+                <li className={`HoverCor ${isActive('front1/tailwind') ? 'active' : ''}`}><Link to="front1/tailwind">Tailwind CSS</Link></li>
+                <li className={`HoverCor ${isActive('front1/img') ? 'active' : ''}`}><Link to="front1/img">Edição de imagem</Link></li>
               </ul>
             </div>
 
-            <div className="discipline front2">
-              <h3 className="HoverCor"><Link to="front2">Front 2</Link></h3>
+            <div className="discipline front2" style={{ display: ['front2', 'javascript', 'js', 'gsap', 'react'].some(bate) ? 'block' : 'none' }}>
+              <h3 className={`HoverCor ${isActive('front2') ? 'active' : ''}`}><Link to="front2">Front 2</Link></h3>
               <ul>
-                <li className="HoverCor"><Link to="front2/js">JavaScript</Link></li>
-                <li className="HoverCor"><Link to="front2/gsap">GSAP</Link></li>
-                <li className="HoverCor"><Link to="front2/react">React</Link></li>
+                <li className={`HoverCor ${isActive('front2/js') ? 'active' : ''}`}><Link to="front2/js">JavaScript</Link></li>
+                <li className={`HoverCor ${isActive('front2/gsap') ? 'active' : ''}`}><Link to="front2/gsap">GSAP</Link></li>
+                <li className={`HoverCor ${isActive('front2/react') ? 'active' : ''}`}><Link to="front2/react">React</Link></li>
               </ul>
             </div>
 
-            <div className="discipline design">
-              <h3 className="HoverCor"><Link to="design">Design Gráfico</Link></h3>
+            <div className="discipline design" style={{ display: ['design', 'figma', 'pencil'].some(bate) ? 'block' : 'none' }}>
+              <h3 className={`HoverCor ${isActive('design') ? 'active' : ''}`}><Link to="design">Design Gráfico</Link></h3>
               <ul>
-                <li className="HoverCor"><Link to="design/figma">Figma</Link></li>
-                <li className="HoverCor"><Link to="design/pencil">Pencil</Link></li>
+                <li className={`HoverCor ${isActive('design/figma') ? 'active' : ''}`}><Link to="design/figma">Figma</Link></li>
+                <li className={`HoverCor ${isActive('design/pencil') ? 'active' : ''}`}><Link to="design/pencil">Pencil</Link></li>
               </ul>
             </div>
 
-            <div className="discipline ihc">
-              <h3 className="HoverCor"><Link to="ihc">IHC</Link></h3>
+
+            <div className="discipline ihc" style={{ display: ['ihc', 'teoria', 'teste', 'heuristica', 'usabilidade'].some(bate) ? 'block' : 'none' }}>
+              <h3 className={`HoverCor ${isActive('ihc') ? 'active' : ''}`}><Link to="ihc">IHC</Link></h3>
               <ul>
-                <li className="HoverCor"><Link to="ihc/teoria">Teoria de interação humano computador</Link></li>
-                <li className="HoverCor"><Link to="ihc/teste">Teste de usabilidade</Link></li>
-                <li className="HoverCor"><Link to="ihc/heuristica">Avaliação heurística</Link></li>
+                <li className={`HoverCor ${isActive('ihc/teoria') ? 'active' : ''}`}><Link to="ihc/teoria">Teoria de interação humano computador</Link></li>
+                <li className={`HoverCor ${isActive('ihc/teste') ? 'active' : ''}`}><Link to="ihc/teste">Teste de usabilidade</Link></li>
+                <li className={`HoverCor ${isActive('ihc/heuristica') ? 'active' : ''}`}><Link to="ihc/heuristica">Avaliação heurística</Link></li>
               </ul>
             </div>
           </div>

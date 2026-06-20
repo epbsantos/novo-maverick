@@ -108,3 +108,9 @@ li {
 #back-to-top:hover {
   background-color: #555;
 }
+
+/* ---------------- NOVO: indicador de página ativa no menu ---------------- */
+.active {
+  font-weight: bold;
+  text-decoration: underline;
+}

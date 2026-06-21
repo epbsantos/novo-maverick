@@ -1,10 +1,10 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { SplitText } from "gsap/all";
-import { Link, Routes, Route } from "react-router";
+import { Routes, Route } from "react-router";
+import { useState } from 'react';
 
-import Menu from "./components/Menu";
-import text from "./constants/text";
+import Sidebar from "./components/Sidebar";
 
 import Slides from "./components/Slides";
 
@@ -18,7 +18,7 @@ import Tailwind from "./components/front1/Tailwind.tsx";
 import Front2 from "./components/front2/Front2.tsx";
 import Javascript from "./components/front2/Javascript.tsx";
 import Gsap from "./components/front2/Gsap.tsx";
-import React from "./components/front2/React.tsx";
+import ReactView from "./components/front2/React.tsx"; // Evitar conflito com React import padrão
 
 import Design from "./components/design/Design.tsx";
 import Figma from "./components/design/Figma.tsx";
@@ -27,9 +27,6 @@ import Ihc from "./components/ihc/Ihc.tsx";
 import Teoria from "./components/ihc/Teoria.tsx";
 import Teste from "./components/ihc/Teste.tsx";
 import Heuristica from "./components/ihc/Heuristica.tsx";
-
-
-import { useState } from 'react';
 
 function App() {
   const [tema, setTema] = useState<'claro' | 'escuro' | 'maverick'>('claro');
@@ -77,77 +74,8 @@ function App() {
     <>
       <section className={`container ${tema}`}>
 
-        <section className="sideMenu" >
-          <div>
-            <img src="/img/logoUTFPR.png" alt="Logo UTFPR" style={{ width: '300px', maxWidth: '100%', paddingBottom: '16px' }} />
-
-            <h1> <Link to="/">{text.title}</Link> </h1>
-            <h2>{text.subtitle}</h2>
-
-            <div style={{ marginTop: '16px', marginBottom: '16px' }}>
-              <label htmlFor="theme-select" style={{ display: 'block', fontSize: '0.9rem', marginBottom: '4px', fontWeight: 'bold' }}>
-                Mudar Visual:
-              </label>
-              <select
-                id="theme-select"
-                value={tema}
-                onChange={(e) => setTema(e.target.value as any)}
-                style={{ padding: '6px', width: '100%', borderRadius: '4px', cursor: 'pointer' }}
-              >
-                <option value="claro">Modo Claro</option>
-                <option value="escuro">Modo Escuro</option>
-
-              </select>
-            </div>
-          </div>
-
-          <Menu />
-
-          <div className="disciplines">
-            <div className="discipline slides">
-              <h3> <Link to="slides">Slides</Link> </h3>
-            </div>
-          </div>
-
-          <div className="disciplines">
-            <div className="discipline front1">
-              <h3> <Link to="front1">Front 1</Link> </h3>
-              <ul>
-                <li><Link to="front1/html">HTML</Link></li>
-                <li><Link to="front1/css">CSS</Link></li>
-                <li><Link to="front1/bootstrap">Bootstrap</Link></li>
-                <li><Link to="front1/tailwind">Tailwind CSS</Link></li>
-                <li><Link to="front1/img">Edição de imagem</Link></li>
-              </ul>
-            </div>
-
-            <div className="discipline front2">
-              <h3><Link to="front2">Front 2</Link></h3>
-              <ul>
-                <li><Link to="front2/js">JavaScript</Link></li>
-                <li><Link to="front2/gsap">GSAP</Link></li>
-                <li><Link to="front2/react">React</Link></li>
-              </ul>
-            </div>
-
-            <div className="discipline design">
-              <h3><Link to="design">Design Gráfico</Link></h3>
-              <ul>
-                <li><Link to="design/figma">Figma</Link></li>
-                <li><Link to="design/pencil">Pencil</Link></li>
-              </ul>
-            </div>
-
-            <div className="discipline ihc">
-              <h3><Link to="ihc">IHC</Link></h3>
-              <ul>
-                <li><Link to="ihc/teoria">Teoria de interação humano computador</Link></li>
-                <li><Link to="ihc/teste">Teste de usabilidade</Link></li>
-                <li><Link to="ihc/heuristica">Avaliação heurística</Link></li>
-              </ul>
-            </div>
-          </div>
-        </section>
+        {/* Sidebar com Menu e Escolha de Tema */}
+        <Sidebar tema={tema} setTema={setTema} />
 
         <section className="ConteudoPrincipal">
           <Routes>
@@ -163,7 +91,7 @@ function App() {
             <Route path="/front2" element={<Front2 />} />
             <Route path="/front2/js" element={<Javascript />} />
             <Route path="/front2/gsap" element={<Gsap />} />
-            <Route path="/front2/react" element={<React />} />
+            <Route path="/front2/react" element={<ReactView />} />
 
             <Route path="/design" element={<Design />} />
             <Route path="/design/figma" element={<Figma />} />

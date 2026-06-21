@@ -41,32 +41,36 @@ function App() {
     });
 
     gsap.from(h1.chars, {
-      yPercent: 100,
-      duration: 1.8,
-      ease: "elastic",
-      stagger: 0.06,
+      opacity: 0,
+      y: 80,
+      duration: 1.2,
+      ease: "power3.out",
+      stagger: 0.04,
     });
 
     gsap.from(h2.chars, {
-      yPercent: 100,
-      duration: 1.2,
-      ease: "elastic",
-      stagger: 0.06,
+      opacity: 0,
+      y: 30,
+      duration: 0.8,
+      ease: "power2.out",
+      stagger: 0.02,
     });
 
     const tl = gsap.timeline();
 
     tl.from("nav", {
-      x: -350,
-      ease: "elastic",
-      duration: 2,
+      opacity: 0,
+      x: -80,
+      duration: 0.8,
+      ease: "power2.out",
     });
 
     tl.from(".discipline", {
-      x: -350,
-      ease: "elastic",
-      duration: 2,
-      stagger: 0.5
+      opacity: 0,
+      y: 30,
+      duration: 0.6,
+      stagger: 0.15,
+      ease: "power2.out"
     });
   });
 
@@ -80,7 +84,7 @@ function App() {
         <section className="ConteudoPrincipal">
           <Routes>
             <Route path="/slides" element={<Slides />} />
-            
+
             <Route path="/front1" element={<Front1 />} />
             <Route path="/front1/html" element={<Html />} />
             <Route path="/front1/css" element={<Css />} />
@@ -101,7 +105,7 @@ function App() {
             <Route path="/ihc/teoria" element={<Teoria />} />
             <Route path="/ihc/teste" element={<Teste />} />
             <Route path="/ihc/heuristica" element={<Heuristica />} />
-            
+
           </Routes>
         </section>
       </section>

@@ -1,56 +1,75 @@
-import { useRef } from "react";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
+import { usePageAnimation } from '../../hooks/usePageAnimation';
 
 function Tailwind() {
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useGSAP(() => {
-    const tl = gsap.timeline();
-
-    tl.from("h3", {
-      y: -20,
-      opacity: 0,
-      duration: 0.6,
-      ease: "power2.out",
-    });
-
-    tl.from("p", {
-      y: 30,
-      opacity: 0,
-      duration: 0.5,
-      stagger: 0.15,
-      ease: "power1.out",
-    }, "-=0.3");
-
-  }, { scope: containerRef });
+  const ref = usePageAnimation({ type: 'scaleIn', selector: '.anim', stagger: 0.1 });
 
   return (
-    <div ref={containerRef} style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '1rem' }}>
-      <h3>Tailwind CSS</h3>
-      <p>
-        O <strong>Tailwind CSS</strong> é um framework CSS utilitário (utility-first) que permite
-        estilizar elementos diretamente no HTML através de classes pré-definidas
-        de baixo nível.
-        Diferente do Bootstrap, ele não oferece componentes prontos, mas sim utilitários
-        granulares para construir interfaces totalmente personalizadas de forma rápida e flexível.
-      </p>
-      <p>
-        Ele é amplamente utilizado no mercado por startups, empresas de tecnologia e
-        desenvolvedores freelancers para criar desde landing pages e portfólios até
-        dashboards administrativos, e-commerces e aplicações web complexas. Sua popularidade
-        cresceu especialmente em projetos que utilizam frameworks como <strong>React</strong>,{' '}
-        <strong>Next.js</strong> e <strong>Vue</strong>, pois se integra facilmente ao fluxo
-        de desenvolvimento moderno. O Tailwind é ideal para quem busca agilidade na
-        estilização sem abrir mão do controle total sobre o design da interface. Saiba mais no{' '}
-        <a
-          href="https://tailwindcss.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          site oficial
+    <div ref={ref} className="mv-page-section">
+      <div className="anim">
+        <h3><i className="bi bi-wind me-2 text-primary" />Tailwind CSS</h3>
+        <span className="badge bg-primary fs-6 mb-3 px-3 py-2 rounded-pill">Utility-First Framework</span>
+        <p className="lead fs-5 text-secondary">
+          O Tailwind CSS é um framework de estilização de baixo nível que permite construir designs personalizados diretamente no HTML através de classes utilitárias.
+        </p>
+      </div>
+
+      <div className="row g-4 mt-2">
+        {[
+          {
+            title: 'Utility-First',
+            desc: 'Construa componentes inteiros sem escrever uma única linha de CSS customizado, usando classes de tamanho, espaçamento e cor diretamente no HTML.',
+            icon: 'bi-box',
+            color: '#0ea5e9'
+          },
+          {
+            title: 'Design Responsivo',
+            desc: 'Adicione prefixos como sm:, md:, lg:, xl: para controlar de forma simples e intuitiva a aparência dos elementos em diferentes tamanhos de tela.',
+            icon: 'bi-laptop',
+            color: '#10b981'
+          },
+          {
+            title: 'Altamente Customizável',
+            desc: 'Configure fontes, paleta de cores, espaçamentos e breakpoints customizados de forma simples através do arquivo tailwind.config.js.',
+            icon: 'bi-sliders',
+            color: '#f59e0b'
+          },
+          {
+            title: 'Developer Experience',
+            desc: 'Integração perfeita com editores, com autocompletar e remoção automática de classes não utilizadas (PurgeCSS) na build de produção.',
+            icon: 'bi-cpu',
+            color: '#6366f1'
+          }
+        ].map((feat) => (
+          <div key={feat.title} className="col-md-6 anim">
+            <div className="card mv-card border-0 shadow-sm h-100 p-3">
+              <div className="card-body">
+                <div className="d-flex align-items-center gap-3 mb-3">
+                  <span
+                    className="d-flex align-items-center justify-content-center rounded-3 fs-4"
+                    style={{
+                      width: '45px',
+                      height: '45px',
+                      backgroundColor: `${feat.color}15`,
+                      color: feat.color,
+                    }}
+                  >
+                    <i className={`bi ${feat.icon}`} />
+                  </span>
+                  <h6 className="card-title fw-bold m-0">{feat.title}</h6>
+                </div>
+                <p className="card-text text-secondary small">{feat.desc}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="alert alert-secondary border-0 shadow-sm mt-4 anim" role="note">
+        <strong>Dica:</strong> Para saber mais sobre como usar classes utilitárias, consulte a{' '}
+        <a href="https://tailwindcss.com/" target="_blank" rel="noopener noreferrer" className="fw-bold">
+          Documentação Oficial do Tailwind CSS
         </a>.
-      </p>
+      </div>
     </div>
   );
 }

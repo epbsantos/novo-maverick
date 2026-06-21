@@ -1,123 +1,381 @@
-  nav {
-    margin: 40px 0;
-  }
+/* ============================================
+   MAVERICK – Design System & Theme Variables
+   ============================================ */
 
-  section {
-    width: 50%;
-    float: left;
-  }
+:root {
+  --mv-sidebar-width: 280px;
+  --mv-transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 
-  .container {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-  }
+  /* Light theme tokens */
+  --mv-bg: #f8f9fa;
+  --mv-sidebar-bg: #ffffff;
+  --mv-sidebar-border: #e2e8f0;
+  --mv-text: #1e293b;
+  --mv-text-muted: #64748b;
+  --mv-link: #2563eb;
+  --mv-link-hover: #1d4ed8;
+  --mv-accent: #3b82f6;
+  --mv-card-bg: #ffffff;
+  --mv-card-border: #e2e8f0;
+  --mv-heading: #0f172a;
+  --mv-nav-item-hover: #f1f5f9;
+  --mv-badge-bg: #dbeafe;
+  --mv-badge-text: #1e40af;
+  --mv-code-bg: #f1f5f9;
+}
 
-  .sideMenu {
-    width: 25%;
-    padding: 32px 32px;
-    height: 100vh;
-    float: left;
-    background-color: rgba(64, 77, 77, 0.123);
-  }
+.escuro {
+  --mv-bg: #0f172a;
+  --mv-sidebar-bg: #1e293b;
+  --mv-sidebar-border: #334155;
+  --mv-text: #e2e8f0;
+  --mv-text-muted: #94a3b8;
+  --mv-link: #60a5fa;
+  --mv-link-hover: #93c5fd;
+  --mv-accent: #60a5fa;
+  --mv-card-bg: #1e293b;
+  --mv-card-border: #334155;
+  --mv-heading: #f8fafc;
+  --mv-nav-item-hover: #334155;
+  --mv-badge-bg: #1e3a5f;
+  --mv-badge-text: #93c5fd;
+  --mv-code-bg: #0f172a;
+}
 
-  .ConteudoPrincipal {
-    width: 75%;
-    padding: 32px 32px;
-    display: flex;
+/* ============================================
+   GLOBAL BASE
+   ============================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+body {
+  background-color: var(--mv-bg);
+  color: var(--mv-text);
+  transition: var(--mv-transition);
+  line-height: 1.6;
+}
+
+/* ============================================
+   LAYOUT
+   ============================================ */
+
+.mv-layout {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--mv-bg);
+  transition: background-color 0.35s ease, color 0.35s ease;
+  color: var(--mv-text);
+}
+
+/* ============================================
+   SIDEBAR
+   ============================================ */
+
+.mv-sidebar {
+  width: var(--mv-sidebar-width);
+  min-height: 100vh;
+  background-color: var(--mv-sidebar-bg);
+  border-right: 1px solid var(--mv-sidebar-border);
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  transition: background-color 0.35s ease, border-color 0.35s ease;
+}
+
+.mv-sidebar::-webkit-scrollbar {
+  width: 4px;
+}
+.mv-sidebar::-webkit-scrollbar-thumb {
+  background: var(--mv-sidebar-border);
+  border-radius: 4px;
+}
+
+.mv-logo {
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  display: block;
+  margin-bottom: 4px;
+  transition: filter 0.35s ease;
+}
+
+.escuro .mv-logo {
+  filter: brightness(0) invert(1);
+}
+
+.mv-site-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--mv-heading);
+  text-decoration: none;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  transition: color 0.35s ease;
+}
+.mv-site-title:hover {
+  color: var(--mv-accent);
+  text-decoration: none;
+}
+
+.mv-site-subtitle {
+  font-size: 0.8rem;
+  color: var(--mv-text-muted);
+  margin: 2px 0 12px;
+  font-style: italic;
+  transition: color 0.35s ease;
+}
+
+/* ============================================
+   THEME TOGGLE BUTTON
+   ============================================ */
+
+.mv-theme-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 20px;
+  border: 1px solid var(--mv-sidebar-border);
+  background-color: var(--mv-nav-item-hover);
+  color: var(--mv-text);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  transition: var(--mv-transition);
+  margin-bottom: 8px;
+}
+.mv-theme-toggle:hover {
+  background-color: var(--mv-accent);
+  color: #fff;
+  border-color: var(--mv-accent);
+}
+
+/* ============================================
+   NAVIGATION LINKS (top)
+   ============================================ */
+
+.mv-nav-top {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 8px;
+}
+.mv-nav-top li a {
+  display: block;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  color: var(--mv-text-muted);
+  text-decoration: none;
+  transition: var(--mv-transition);
+}
+.mv-nav-top li a:hover {
+  background-color: var(--mv-nav-item-hover);
+  color: var(--mv-link);
+}
+
+/* ============================================
+   DISCIPLINES (sidebar accordion groups)
+   ============================================ */
+
+.mv-disciplines {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.mv-discipline {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.mv-discipline h3 {
+  margin: 0;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 8px 12px 4px;
+  color: var(--mv-text-muted);
+  transition: color 0.35s ease;
+}
+
+.mv-discipline h3 a {
+  color: inherit;
+  text-decoration: none;
+}
+.mv-discipline h3 a:hover {
+  color: var(--mv-accent);
+}
+
+.mv-discipline ul {
+  list-style: none;
+  padding: 0 0 6px;
+  margin: 0;
+}
+
+.mv-discipline ul li a {
+  display: block;
+  padding: 5px 12px;
+  font-size: 0.85rem;
+  color: var(--mv-text);
+  text-decoration: none;
+  border-radius: 7px;
+  transition: var(--mv-transition);
+}
+
+.mv-discipline ul li a:hover {
+  background-color: var(--mv-nav-item-hover);
+  color: var(--mv-link);
+  padding-left: 18px;
+}
+
+/* color accents per discipline */
+.mv-discipline.front1 h3 { color: #7c3aed; }
+.mv-discipline.front2 h3 { color: #059669; }
+.mv-discipline.design  h3 { color: #dc2626; }
+.mv-discipline.ihc     h3 { color: #d97706; }
+
+/* ============================================
+   MAIN CONTENT AREA
+   ============================================ */
+
+.mv-content {
+  flex: 1;
+  min-width: 0;
+  padding: 40px 48px;
+  overflow-y: auto;
+  transition: background-color 0.35s ease;
+}
+
+/* ============================================
+   CONTENT TYPOGRAPHY
+   ============================================ */
+
+.mv-content h1,
+.mv-content h2,
+.mv-content h3 {
+  color: var(--mv-heading);
+  transition: color 0.35s ease;
+}
+
+.mv-content h3 {
+  font-size: 1.75rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+}
+
+.mv-content h4 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--mv-heading);
+  margin: 1.5rem 0 0.5rem;
+  transition: color 0.35s ease;
+}
+
+.mv-content p {
+  color: var(--mv-text);
+  max-width: 72ch;
+  transition: color 0.35s ease;
+}
+
+.mv-content a {
+  color: var(--mv-link);
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+.mv-content a:hover {
+  color: var(--mv-link-hover);
+}
+
+.mv-content ul,
+.mv-content ol {
+  padding-left: 1.4rem;
+  color: var(--mv-text);
+  transition: color 0.35s ease;
+}
+.mv-content li {
+  margin-bottom: 6px;
+}
+
+/* ============================================
+   CONTENT CARDS (Bootstrap override for theme)
+   ============================================ */
+
+.mv-card {
+  background-color: var(--mv-card-bg);
+  border: 1px solid var(--mv-card-border);
+  color: var(--mv-text);
+  transition: var(--mv-transition);
+}
+
+.mv-badge {
+  background-color: var(--mv-badge-bg) !important;
+  color: var(--mv-badge-text) !important;
+}
+
+/* ============================================
+   CODE BLOCK
+   ============================================ */
+
+.mv-code {
+  background-color: var(--mv-code-bg);
+  border: 1px solid var(--mv-card-border);
+  border-radius: 8px;
+  padding: 16px 20px;
+  font-family: 'Fira Code', 'Cascadia Code', monospace;
+  font-size: 0.85rem;
+  color: var(--mv-text);
+  overflow-x: auto;
+  transition: var(--mv-transition);
+}
+
+/* ============================================
+   PAGE SECTION ENTRY (used by animation hook)
+   ============================================ */
+
+.mv-page-section {
+  opacity: 1; /* GSAP will handle animation */
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 768px) {
+  .mv-layout {
     flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
   }
-
-  a {
-    text-decoration: none;
+  .mv-sidebar {
+    width: 100%;
+    min-height: auto;
+    height: auto;
+    position: relative;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 16px;
   }
-
-  .container, .sideMenu, .ConteudoPrincipal, section, a, h1, h2, h3, ul, li {
-    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, text-shadow 0.3s ease;
+  .mv-content {
+    padding: 24px 20px;
   }
-  /* ---------------- TEMA CLARO ---------------- */
-  .container.claro {
-    background-color: #ffffff;
-    color: #2c3e50;
-  }
-
-  .container.claro .sideMenu {
-    background-color: rgba(64, 77, 77, 0.08);
-    border-right: 1px solid #e0e0e0;
-  }
-
-  .container.claro a {
-    color: #0066cc;
-  }
-  /* ---------------- TEMA ESCURO ---------------- */
-  .container.escuro {
-    background-color: #121212;
-    color: #e0e0e0;
-  }
-
-  .container.escuro .sideMenu {
-    background-color: #1c1c1c;
-    border-right: 1px solid #333333;
-  }
-
-  .container.escuro a {
-    color: #4fc3f7;
-  }
-
-  .container.escuro .sideMenu img,
-  .container.maverick .sideMenu img {
-    filter: brightness(0) invert(1);
-  }
-
-  /*---------------REsponsividade---------------------*/
-  @media (max-width: 768px) {
-
-    .container {
-      flex-direction: column;
-    }
-  
-    .sideMenu {
-      width: 100%;
-      height: auto;
-      padding: 16px;
-    }
-  
-    .ConteudoPrincipal {
-      width: 100%;
-    }
-
-    .sideMenu a {
-      font-size: 1.1rem;
-      padding: 10px 0;
-      display: inline-block;
-    }
-
-    .sideMenu h3 {
-      font-size: 1.3rem;
-    }
-
-  
-  }
-
-  @media (min-width: 769px) and (max-width: 1024px) {
-
-
-    .sideMenu {
-      width: auto;
-      height: auto;
-      padding: 16px;
-    }
-
-    .sideMenu a {
-      font-size: 1.2rem;
-      padding: 8px 0;
-      display: inline-block;
-    }
-  
-    .sideMenu h3 {
-      font-size: 1.4rem;
-    }
-  
-  }
+}

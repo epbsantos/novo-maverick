@@ -1,82 +1,45 @@
-import { useRef } from "react";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
+import { usePageAnimation } from '../../hooks/usePageAnimation';
 
 function Design() {
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useGSAP(() => {
-    const tl = gsap.timeline();
-
-    tl.from("h3", {
-      y: -20,
-      opacity: 0,
-      duration: 0.6,
-      ease: "power2.out",
-    });
-
-    tl.from("img", {
-      scale: 0.8,
-      opacity: 0,
-      duration: 0.8,
-      ease: "back.out(1.7)",
-    }, "-=0.3");
-
-    tl.from("h4, p, ul", {
-      y: 30,
-      opacity: 0,
-      duration: 0.5,
-      stagger: 0.15,
-      ease: "power1.out",
-    }, "-=0.4");
-
-  }, { scope: containerRef });
+  const ref = usePageAnimation({ type: 'clipReveal', selector: '.anim', stagger: 0.18 });
 
   return (
-    <div ref={containerRef} style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '1rem' }}>
-      <h3>Design Gráfico</h3>
-      
-      <img src="/img/Gimp.png" style={{ width: '450px', maxWidth: '100%' }} alt="Interface do GIMP" />
-      
-      <h4>Ementa</h4>
-      <p style={{ lineHeight: '1.6' }}>
-        Princípios da comunicação visual aplicados ao meio digital. Tipografia. Cor. Imagem digital: dimensão, resolução e formatos. Construção de imagens e composições.
-        Uso de software para design gráfico e edição de imagens digitais.
-      </p>
-      
-      <h4>Duração</h4>
-      <p>30h</p>
+    <div ref={ref} className="mv-page-section">
+      <div className="anim">
+        <h3><i className="bi bi-palette2 me-2 text-danger" />Design Gráfico</h3>
+        <span className="badge mv-badge fs-6 mb-3">30 horas</span>
+        <p>
+          Princípios da comunicação visual aplicados ao meio digital. Tipografia, teoria
+          das cores, imagem digital — dimensão, resolução e formatos. Construção de
+          imagens, composições e uso de software para design gráfico.
+        </p>
+      </div>
 
-      <h4>Objetivos de Aprendizagem</h4>
-      <ul style={{ paddingLeft: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.5rem', lineHeight: '1.6' }}>
-        <li>Capacitar os alunos a utilizar ferramentas de prototipagem e design gráfico para criar projetos visuais.</li>
-        <li>Compreender e aplicar os princípios fundamentais da comunicação visual e do design responsivo em projetos práticos de layout.</li>
-        <li>Manipular imagens digitais controlando suas dimensões, resoluções, formatos e ajustes fundamentais como brilho e contraste.</li>
-        <li>Desenvolver interfaces e protótipos de layouts criativos e inovadores para aplicações móveis e desktop, combinando de forma harmônica tipografia, cores e elementos gráficos.</li>
-      </ul>
+      <div className="row g-3 mt-1">
+        {[
+          { icon: 'bi-type', color: '#6366f1', title: 'Tipografia', desc: 'Hierarquia visual, escolha de fontes, legibilidade e contraste.' },
+          { icon: 'bi-palette', color: '#ef4444', title: 'Teoria das Cores', desc: 'Círculo cromático, harmonia, temperatura e psicologia das cores.' },
+          { icon: 'bi-aspect-ratio', color: '#f59e0b', title: 'Imagem Digital', desc: 'Resolução (DPI/PPI), formatos (PNG, SVG, WEBP) e compressão.' },
+          { icon: 'bi-grid-1x2', color: '#10b981', title: 'Composição', desc: 'Regra dos terços, espaço negativo, alinhamento e proximidade.' },
+        ].map(f => (
+          <div key={f.title} className="col-sm-6 anim">
+            <div className="card mv-card border-0 shadow-sm h-100">
+              <div className="card-body d-flex gap-3">
+                <i className={`bi ${f.icon} fs-2 flex-shrink-0`} style={{ color: f.color }} />
+                <div>
+                  <h6 className="card-title">{f.title}</h6>
+                  <p className="card-text small" style={{ color: 'var(--mv-text-muted)' }}>{f.desc}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
 
-      <h4>Conteúdos:</h4>
-      <ul style={{ paddingLeft: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.5rem', lineHeight: '1.6' }}>
-        <li>
-          <strong>Princípios de Comunicação Visual:</strong> Elementos fundamentais do design (linhas, formas, cores, texturas e tipografia).
-          Aplicação prática de conceitos de equilíbrio, contraste, hierarquia, proporção, unidade e ênfase em layouts.
-        </li>
-        <li>
-          <strong>Imagem Digital e Edição:</strong> Conceitos de dimensão, resolução e formatos de imagens digitais. Apresentação e uso de software de
-          edição de imagens com suas ferramentas de seleção, corte, redimensionamento, ajuste de brilho e contraste.
-        </li>
-        <li>
-          <strong>Prototipagem e Interação:</strong> Introdução à prototipagem de interfaces e criação de protótipos-layout. Configuração de ferramentas
-          específicas e uso da paleta de componentes para o desenvolvimento de páginas Web e interfaces de dispositivos móveis.
-          Criação de transições, efeitos para usabilidade e práticas de trabalho colaborativo em equipe (compartilhamento, comentários e revisões).
-        </li>
-      </ul>
-
-      <h4>Ferramentas e Tecnologias</h4>
-      <ul style={{ paddingLeft: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.5rem', lineHeight: '1.6' }}>
-        <li><strong>Software de Edição de Imagens Digitais</strong>: Ferramenta dedicada ao tratamento, corte, ajuste e manipulação técnica de elementos visuais e composições.</li>
-        <li><strong>Ferramenta de Prototipação</strong>: Plataforma digital voltada à construção de componentes, desenho de layouts responsivos para web/mobile e criação de interações e transições.</li>
-      </ul>
+      <div className="alert alert-secondary border-0 shadow-sm mt-4 anim" role="note">
+        <strong><i className="bi bi-tools me-1" />Ferramentas utilizadas:</strong>{' '}
+        GIMP, Figma, Pencil Project, Inkscape.
+      </div>
     </div>
   );
 }

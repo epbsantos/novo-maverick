@@ -1,48 +1,41 @@
-import { useRef } from "react";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
+import { usePageAnimation } from '../../hooks/usePageAnimation';
 
 function Pencil() {
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useGSAP(() => {
-    const tl = gsap.timeline();
-
-    tl.from("h3", {
-      y: -20,
-      opacity: 0,
-      duration: 0.6,
-      ease: "power2.out",
-    });
-
-    tl.from("img", {
-      scale: 0.8,
-      opacity: 0,
-      duration: 0.8,
-      ease: "back.out(1.7)",
-    }, "-=0.3");
-
-    tl.from("a, h4, p", {
-      y: 30,
-      opacity: 0,
-      duration: 0.5,
-      stagger: 0.15,
-      ease: "power1.out",
-    }, "-=0.4");
-
-  }, { scope: containerRef });
+  const ref = usePageAnimation({ type: 'scaleIn', selector: '.anim', stagger: 0.1 });
 
   return (
-    <div ref={containerRef} style={{ display: 'flex', flexDirection: 'column', alignItems: 'left', gap: '1rem' }}>
-      <h3>Pencil</h3>
+    <div ref={ref} className="mv-page-section">
+      <div className="anim">
+        <h3><i className="bi bi-pencil-square me-2 text-warning" />Pencil Project</h3>
+        <span className="badge bg-warning text-dark fs-6 mb-3 px-3 py-2 rounded-pill">Wireframing Open-Source</span>
+      </div>
 
-      <img src="/img/Pencil.png" alt="Pencil Layout" style={{ width: '300px', maxWidth: '100%' }} />
-      <a href="http://pencil.dev" target="_blank" rel="noopener noreferrer">pencil.dev</a>
+      <div className="row g-4 align-items-center mt-2">
+        <div className="col-lg-5 anim">
+          <div className="card mv-card border-0 shadow-sm overflow-hidden">
+            <img src="/img/Pencil.png" alt="Pencil Layout" className="img-fluid" style={{ objectFit: 'cover' }} />
+          </div>
+        </div>
 
-      <h4>Sobre o Pencil</h4>
-      <p>
-        O Pencil Project é uma ferramenta de prototipagem de interface gráfica (GUI) de código aberto e gratuita. Ele foi desenvolvido para criar rapidamente wireframes, mockups e protótipos interativos para páginas web e aplicativos desktop ou mobile, contando com uma vasta coleção de stencils e formas integradas.
-      </p>
+        <div className="col-lg-7 anim">
+          <h5 className="fw-bold mb-3">Rascunhos e Mockups Rápidos de Interface</h5>
+          <p className="text-secondary">
+            O Pencil Project é um aplicativo de código aberto (open-source) focado no design de wireframes e protótipos de tela para diferentes plataformas. Ele oferece uma grande coleção de elementos gráficos pré-construídos para desktop, web e dispositivos móveis.
+          </p>
+          <p className="text-secondary">
+            É a escolha ideal para desenvolvedores e analistas criarem esboços rápidos e validados de fluxos de telas de maneira ágil, sem a complexidade de ferramentas de alta fidelidade como o Figma, permitindo o foco na estrutura e usabilidade iniciais da interface.
+          </p>
+          <a
+            href="https://pencil.evolus.vn/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-outline-warning text-dark d-inline-flex align-items-center gap-2 mt-2"
+          >
+            Visitar site oficial
+            <i className="bi bi-box-arrow-up-right" />
+          </a>
+        </div>
+      </div>
     </div>
   );
 }

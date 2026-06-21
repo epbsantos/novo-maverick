@@ -1,57 +1,66 @@
-import { useRef } from "react";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
+import { usePageAnimation } from '../../hooks/usePageAnimation';
 
-function ReactComponent() {
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useGSAP(() => {
-    const tl = gsap.timeline();
-
-    tl.from("h3", {
-      y: -20,
-      opacity: 0,
-      duration: 0.6,
-      ease: "power2.out",
-    });
-
-    tl.from("h4, p, ul", {
-      y: 30,
-      opacity: 0,
-      duration: 0.5,
-      stagger: 0.15,
-      ease: "power1.out",
-    }, "-=0.3");
-
-  }, { scope: containerRef });
+function React_() {
+  const ref = usePageAnimation({ type: 'fadeUp', selector: '.anim', stagger: 0.1 });
 
   return (
-    <div ref={containerRef} style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '1rem' }}>
-      <h3>React JS</h3>
+    <div ref={ref} className="mv-page-section">
+      <div className="anim">
+        <h3><i className="bi bi-diagram-3 me-2" style={{ color: '#61dafb' }} />React</h3>
+        <p>
+          React é uma biblioteca JavaScript criada pelo Facebook para construção de interfaces
+          de usuário componentizadas, declarativas e de alta performance. Com o modelo de
+          Virtual DOM, apenas as partes alteradas da tela são re-renderizadas.{' '}
+          <a href="https://react.dev" target="_blank" rel="noopener noreferrer">
+            react.dev <i className="bi bi-box-arrow-up-right ms-1" />
+          </a>
+        </p>
+      </div>
 
-      <p style={{ lineHeight: '1.6' }}>
-        O <strong>React</strong> é uma biblioteca JavaScript para a criação de interfaces de usuário interativas e reutilizáveis.
-        Ele permite construir aplicações web de forma eficiente por meio de componentes, facilitando a organização
-        e a manutenção do código.
-      </p>
+      <div className="row g-3 mt-1">
+        {[
+          { icon: 'bi-puzzle', title: 'Componentes', desc: 'Blocos reutilizáveis de UI. Tudo é um componente — botões, formulários, páginas inteiras.' },
+          { icon: 'bi-arrow-repeat', title: 'Estado (State)', desc: 'useState controla dados que, ao mudar, re-renderizam o componente automaticamente.' },
+          { icon: 'bi-gear', title: 'Hooks', desc: 'Funções especiais como useEffect, useRef, useCallback, useContext e useMemo.' },
+          { icon: 'bi-signpost-2', title: 'React Router', desc: 'Roteamento client-side. Esta própria aplicação usa React Router v7!' },
+          { icon: 'bi-droplet-half', title: 'JSX', desc: 'Sintaxe que mistura HTML com JavaScript, tornando o código de UI intuitivo.' },
+          { icon: 'bi-arrow-down-up', title: 'Props', desc: 'Dados passados de pai para filho, tornando componentes configuráveis e reutilizáveis.' },
+        ].map(f => (
+          <div key={f.title} className="col-md-6 anim">
+            <div className="card mv-card border-0 shadow-sm h-100">
+              <div className="card-body">
+                <i className={`bi ${f.icon} fs-4 mb-2`} style={{ color: '#61dafb' }} />
+                <h6 className="card-title">{f.title}</h6>
+                <p className="card-text small" style={{ color: 'var(--mv-text-muted)' }}>{f.desc}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
 
-      <h4>Características Principais:</h4>
-      <ul style={{ paddingLeft: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.5rem', lineHeight: '1.6' }}>
-        <li>
-          <strong>Componentização:</strong> Permite dividir a interface em componentes reutilizáveis e independentes.
-        </li>
-        <li>
-          <strong>Virtual DOM:</strong> Atualiza na tela apenas o que mudou de fato, otimizando o render e tornando a aplicação muito mais rápida.
-        </li>
-        <li>
-          <strong>Fluxo de Dados Unidirecional:</strong> Os dados fluem de forma organizada dos componentes pais para os filhos, tornando o comportamento previsível.
-        </li>
-        <li>
-          <strong>JSX:</strong> Combina JavaScript e HTML em uma sintaxe simples e intuitiva para criar as interfaces.
-        </li>
-      </ul>
+      <div className="mt-4 anim">
+        <h4>Exemplo de componente</h4>
+        <pre className="mv-code">
+{`import { useState } from 'react';
+
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <p>Contagem: {count}</p>
+      <button onClick={() => setCount(c => c + 1)}>
+        Incrementar
+      </button>
     </div>
   );
 }
 
-export default ReactComponent;
+export default Counter;`}
+        </pre>
+      </div>
+    </div>
+  );
+}
+
+export default React_;

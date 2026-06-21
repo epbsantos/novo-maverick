@@ -1,63 +1,58 @@
-import { useRef } from "react";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
+import { usePageAnimation } from '../../hooks/usePageAnimation';
 
 function Teoria() {
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useGSAP(() => {
-    const tl = gsap.timeline();
-
-    tl.from("h3", {
-      y: -20,
-      opacity: 0,
-      duration: 0.6,
-      ease: "power2.out",
-    });
-
-    tl.from("h4, p, ul", {
-      y: 30,
-      opacity: 0,
-      duration: 0.5,
-      stagger: 0.15,
-      ease: "power1.out",
-    }, "-=0.3");
-
-  }, { scope: containerRef });
+  const ref = usePageAnimation({ type: 'fadeUp', selector: '.anim', stagger: 0.1 });
 
   return (
-    <div ref={containerRef} style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '1rem' }}>
-      <h3>Teoria de IHC</h3>
+    <div ref={ref} className="mv-page-section">
+      <div className="anim">
+        <h3><i className="bi bi-book me-2 text-primary" />Teoria de IHC</h3>
+        <span className="badge bg-primary fs-6 mb-3 px-3 py-2 rounded-pill">Fundamentos Teóricos</span>
+        <p className="lead fs-5 text-secondary">
+          A Interação Humano-Computador (IHC) investiga como as pessoas interagem com sistemas e tecnologias, buscando torná-los fáceis, eficientes e agradáveis.
+        </p>
+      </div>
 
-      <p style={{ lineHeight: '1.6' }}>
-        A Interação Humano-Computador (IHC) é uma área de estudo que busca
-        compreender como as pessoas interagem com sistemas computacionais,
-        visando desenvolver interfaces mais eficientes, acessíveis e fáceis
-        de usar.
-      </p>
+      <div className="row g-4 mt-2">
+        <div className="col-md-6 anim">
+          <div className="card mv-card border-0 shadow-sm h-100 p-3">
+            <div className="card-body">
+              <h5 className="fw-bold mb-3"><i className="bi bi-bullseye me-2 text-danger" />Objetivos da IHC</h5>
+              <ul className="list-unstyled d-flex flex-column gap-2 text-secondary">
+                <li><i className="bi bi-check-circle-fill text-success me-2" />Melhorar e enriquecer a experiência do usuário.</li>
+                <li><i className="bi bi-check-circle-fill text-success me-2" />Facilitar a execução rápida e correta de tarefas.</li>
+                <li><i className="bi bi-check-circle-fill text-success me-2" />Minimizar erros e frustrações do usuário final.</li>
+                <li><i className="bi bi-check-circle-fill text-success me-2" />Aumentar a produtividade e a taxa de conversão.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
 
-      <h4>Objetivos da IHC</h4>
-      <ul style={{ paddingLeft: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.5rem', lineHeight: '1.6' }}>
-        <li>Melhorar a experiência do usuário.</li>
-        <li>Facilitar a realização de tarefas.</li>
-        <li>Reduzir erros durante a utilização do sistema.</li>
-        <li>Aumentar a satisfação e a produtividade dos usuários.</li>
-      </ul>
+        <div className="col-md-6 anim">
+          <div className="card mv-card border-0 shadow-sm h-100 p-3">
+            <div className="card-body">
+              <h5 className="fw-bold mb-3"><i className="bi bi-star me-2 text-warning" />Princípios Fundamentais</h5>
+              <div className="row g-2">
+                {[
+                  { name: 'Usabilidade', desc: 'Facilidade de aprendizado e eficiência de uso.' },
+                  { name: 'Acessibilidade', desc: 'Inclusão para todas as capacidades e limitações.' },
+                  { name: 'Feedback', desc: 'Sinalização clara das ações tomadas pelo usuário.' },
+                  { name: 'Consistência', desc: 'Padrões visuais e lógicos reconhecíveis.' }
+                ].map(p => (
+                  <div key={p.name} className="col-6 mb-2">
+                    <strong className="d-block text-dark mb-1">{p.name}</strong>
+                    <span className="small text-secondary">{p.desc}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-      <h4>Princípios Fundamentais</h4>
-      <ul style={{ paddingLeft: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.5rem', lineHeight: '1.6' }}>
-        <li><strong>Usabilidade:</strong> facilidade de aprendizado e uso.</li>
-        <li><strong>Acessibilidade:</strong> inclusão de usuários com diferentes necessidades.</li>
-        <li><strong>Feedback:</strong> o sistema deve informar o resultado das ações do usuário.</li>
-        <li><strong>Consistência:</strong> elementos semelhantes devem funcionar da mesma forma.</li>
-      </ul>
-
-      <h4>Importância</h4>
-      <p style={{ lineHeight: '1.6' }}>
-        A IHC é fundamental para o desenvolvimento de softwares de qualidade,
-        pois considera as características, necessidades e limitações dos
-        usuários durante o processo de criação das interfaces.
-      </p>
+      <div className="alert alert-secondary border-0 shadow-sm mt-4 anim" role="note">
+        <strong>Importância da IHC:</strong> Considerar as limitações físicas, cognitivas e contextuais das pessoas durante o processo de design garante a construção de produtos digitais inclusivos, que evitam erros operacionais e oferecem maior satisfação.
+      </div>
     </div>
   );
 }

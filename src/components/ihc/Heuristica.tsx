@@ -1,82 +1,61 @@
-import { useRef } from "react";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
+import { usePageAnimation } from '../../hooks/usePageAnimation';
 
 function Heuristica() {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const ref = usePageAnimation({ type: 'fadeUp', selector: '.anim', stagger: 0.07 });
 
-  useGSAP(() => {
-    const tl = gsap.timeline();
+  const heuristicas = [
+    { n: 1, title: 'Visibilidade do status do sistema', desc: 'Mantenha o usuário informado sobre o que está acontecendo com feedback apropriado.' },
+    { n: 2, title: 'Compatibilidade com o mundo real', desc: 'Use linguagem familiar ao usuário, evitando jargões técnicos.' },
+    { n: 3, title: 'Controle e liberdade do usuário', desc: 'Ofereça "saída de emergência" clara para desfazer ações indesejadas.' },
+    { n: 4, title: 'Consistência e padrões', desc: 'Siga convenções da plataforma. Usuários não devem adivinhar significados.' },
+    { n: 5, title: 'Prevenção de erros', desc: 'Evite que erros ocorram. Exiba confirmação antes de ações críticas.' },
+    { n: 6, title: 'Reconhecimento em vez de memorização', desc: 'Torne ações e opções visíveis para reduzir carga cognitiva.' },
+    { n: 7, title: 'Flexibilidade e eficiência de uso', desc: 'Suporte tanto iniciantes quanto usuários avançados com atalhos e aceleradores.' },
+    { n: 8, title: 'Design estético e minimalista', desc: 'Não inclua informações irrelevantes — cada elemento compete pela atenção do usuário.' },
+    { n: 9, title: 'Suporte para diagnóstico e recuperação de erros', desc: 'Mensagens de erro claras, que apontam o problema e sugerem solução.' },
+    { n: 10, title: 'Ajuda e documentação', desc: 'Ajuda deve ser fácil de buscar, focada nas tarefas do usuário.' },
+  ];
 
-    tl.from("h3", {
-      y: -20,
-      opacity: 0,
-      duration: 0.6,
-      ease: "power2.out",
-    });
-
-    tl.from("h4, p, ul, ol", {
-      y: 30,
-      opacity: 0,
-      duration: 0.5,
-      stagger: 0.15,
-      ease: "power1.out",
-    }, "-=0.3");
-
-  }, { scope: containerRef });
+  const colors = ['#7c3aed','#2563eb','#059669','#d97706','#dc2626','#0891b2','#7c3aed','#2563eb','#059669','#d97706'];
 
   return (
-    <div ref={containerRef} style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '1rem' }}>
-      <h3>Avaliação Heurística</h3>
+    <div ref={ref} className="mv-page-section">
+      <div className="anim">
+        <h3><i className="bi bi-list-check me-2 text-warning" />Avaliação Heurística</h3>
+        <p>
+          Método de inspeção de usabilidade realizado por especialistas que analisam a interface
+          contra as <strong>10 Heurísticas de Nielsen</strong> — diretrizes universais de design de interfaces.
+        </p>
+      </div>
 
-      <p style={{ lineHeight: '1.6' }}>
-        A Avaliação Heurística é um método de inspeção de usabilidade que ajuda a identificar problemas de usabilidade na interface do usuário. Ela é realizada por avaliadores especialistas que analisam a interface e julgam sua conformidade com princípios de usabilidade reconhecidos (as chamadas "heurísticas").
-      </p>
+      <div className="anim mb-3">
+        <div className="alert alert-info border-0 shadow-sm">
+          <i className="bi bi-info-circle me-1" />
+          <strong>Por que usar?</strong> Identifica problemas de usabilidade cedo, com baixo custo,
+          sem precisar de usuários reais.
+        </div>
+      </div>
 
-      <h4>Por que realizar a Avaliação Heurística?</h4>
-      <ul style={{ paddingLeft: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.5rem', lineHeight: '1.6' }}>
-        <li>Pode ser realizada logo no início do projeto, inclusive com esboços ou protótipos de baixa fidelidade.</li>
-        <li>Ajuda a garantir que a interface siga padrões consolidados de design e comportamento esperado do usuário.</li>
-        <li>Permite corrigir problemas de usabilidade graves antes de conduzir testes mais caros com usuários reais.</li>
-      </ul>
-
-      <h4>As 10 Heurísticas de Usabilidade de Jakob Nielsen</h4>
-      <p style={{ lineHeight: '1.6' }}>
-        Desenvolvidas por Jakob Nielsen e Rolf Molich, essas 10 diretrizes gerais de design de interface de usuário são amplamente utilizadas para avaliar a qualidade de sistemas interativos:
-      </p>
-
-      <ol style={{ paddingLeft: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.4rem', lineHeight: '1.6', listStyleType: 'decimal' }}>
-        <li>
-          <strong>Visibilidade do status do sistema:</strong> O sistema deve sempre manter os usuários informados sobre o que está acontecendo por meio de feedback apropriado no tempo certo.
-        </li>
-        <li>
-          <strong>Compatibilidade entre o sistema e o mundo real:</strong> O sistema deve falar a linguagem do usuário, usando palavras, frases e conceitos familiares ao usuário, em vez de jargões técnicos do sistema.
-        </li>
-        <li>
-          <strong>Controle e liberdade do usuário:</strong> Os usuários frequentemente realizam ações por engano. O sistema deve oferecer uma "saída de emergência" clara para retornar ao estado anterior sem complicações (como desfazer e refazer).
-        </li>
-        <li>
-          <strong>Consistência e padrões:</strong> O usuário não deve ter dúvidas se diferentes termos, situações ou ações significam a mesma coisa. O design deve seguir as convenções da plataforma e do próprio sistema.
-        </li>
-        <li>
-          <strong>Prevenção de erros:</strong> Melhor do que projetar ótimas mensagens de erro é evitar que os erros ocorram. Remova opções propensas a erro ou exiba uma confirmação antes de executar ações críticas.
-        </li>
-        <li>
-          <strong>Reconhecimento em vez de memorização:</strong> Reduza a carga cognitiva do usuário tornando objetos, ações e opções visíveis. O usuário não deve precisar lembrar de informações de uma tela para outra.
-        </li>
-        <li>
-          <strong>Flexibilidade e eficiência de uso:</strong> O sistema deve acomodar tanto usuários inexperientes quanto experientes. Atalhos de teclado ou aceleradores (invisíveis aos novatos) tornam a interação de usuários avançados muito mais rápida.
-        </li>
-        <li>
-          <strong>Design estético e minimalista:</strong> Interfaces não devem conter informações irrelevantes ou raramente necessárias. Informação extra concorre com a informação essencial, reduzindo sua visibilidade.
-        </li>
-        <li>
-          <strong>Suporte para diagnóstico e recuperação de erros:</strong> Mensagens de erro devem ser expressas em linguagem clara (sem códigos obscuros), apontar precisamente o problema e sugerir uma solução construtiva.
-        </li>
-        <li>
-          <strong>Ajuda e documentação:</strong> Embora seja melhor que o sistema funcione sem manuais, pode ser necessário fornecer ajuda. Ela deve ser fácil de buscar, focada nas tarefas do usuário e detalhar passos objetivos.
-        </li>
-      </ol>
+      <div className="row g-2">
+        {heuristicas.map(({ n, title, desc }) => (
+          <div key={n} className="col-12 anim">
+            <div className="card mv-card border-0 shadow-sm">
+              <div className="card-body d-flex gap-3 py-2 px-3">
+                <div
+                  className="flex-shrink-0 d-flex align-items-center justify-content-center rounded-circle fw-bold text-white"
+                  style={{ width: 36, height: 36, minWidth: 36, background: colors[n - 1], fontSize: '0.85rem' }}
+                >
+                  {n}
+                </div>
+                <div>
+                  <strong style={{ fontSize: '0.9rem' }}>{title}</strong>
+                  <p className="small mb-0 mt-1" style={{ color: 'var(--mv-text-muted)' }}>{desc}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

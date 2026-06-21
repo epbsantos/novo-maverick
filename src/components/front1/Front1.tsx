@@ -1,78 +1,60 @@
-import { useRef } from "react";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
+import { usePageAnimation } from '../../hooks/usePageAnimation';
 
 function Front1() {
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useGSAP(() => {
-    const tl = gsap.timeline();
-
-    tl.from("h3", {
-      y: -20,
-      opacity: 0,
-      duration: 0.6,
-      ease: "power2.out",
-    });
-
-    tl.from("h4, p, ul", {
-      y: 30,
-      opacity: 0,
-      duration: 0.5,
-      stagger: 0.15,
-      ease: "power1.out",
-    }, "-=0.3");
-
-  }, { scope: containerRef });
+  const ref = usePageAnimation({ type: 'fadeUp', selector: '.anim', stagger: 0.12 });
 
   return (
-    <div ref={containerRef} style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '1rem' }}>
-      <h3>
-        Desenvolvimento <i>Web Front-End</i> 1
-      </h3>
+    <div ref={ref} className="mv-page-section">
+      <div className="anim">
+        <span className="badge mv-badge fs-6 mb-3">
+          <i className="bi bi-1-circle me-1" />60 horas
+        </span>
+        <h3>Desenvolvimento <em>Web Front-End</em> 1</h3>
+      </div>
 
-      <h4>Ementa</h4>
-      <p>
-        Linguagens de marcação moderna para estruturação de conteúdo para Web. Linguagem de marcação moderna para estilização de conteúdo na Web.
-        Boas práticas e padrões de apresentação, acessibilidade e responsividade dos conteúdos Web.
-      </p>
-      
-      <h4>Duração</h4>
-      <p>60h</p>
+      <div className="anim">
+        <h4>Ementa</h4>
+        <p>
+          Linguagens de marcação moderna para estruturação de conteúdo para Web.
+          Linguagem de marcação moderna para estilização de conteúdo na Web. Boas
+          práticas e padrões de apresentação, acessibilidade e responsividade dos
+          conteúdos Web.
+        </p>
+      </div>
 
-      <h4>Objetivos de Aprendizagem</h4>
-      <ul style={{ paddingLeft: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-        <li>Compreender os fundamentos da linguagem JavaScript e sua aplicação no desenvolvimento web.</li>
-        <li>Compreender a introdução à Web e os conceitos fundamentais para a criação de páginas estáticas na internet.</li>
-        <li>Manipular linguagens de marcação moderna (HTML) para estruturar elementos de texto, mídias, tabelas e formulários.</li>
-        <li>Desenvolver a estilização de conteúdos utilizando folhas de estilo (CSS) para controlar cores, fontes, bordas, espaçamentos e posicionamentos.</li>
-        <li>Aplicar padrões recomendados e boas práticas de apresentação, visando a construção de layouts adaptativos e responsivos para múltiplos dispositivos.</li>
-        <li>Garantir a qualidade e conformidade das páginas por meio de padrões de acessibilidade e técnicas de validação do documento.</li>
-      </ul>
+      <div className="row g-3 mt-2 anim">
+        {[
+          { icon: 'bi-filetype-html', title: 'HTML', color: '#e44d26', desc: 'Estruturação semântica de conteúdo.' },
+          { icon: 'bi-filetype-css', title: 'CSS', color: '#264de4', desc: 'Estilização e layout responsivo.' },
+          { icon: 'bi-bootstrap', title: 'Bootstrap', color: '#7952b3', desc: 'Framework de componentes UI.' },
+          { icon: 'bi-wind', title: 'Tailwind', color: '#06b6d4', desc: 'CSS utilitário mobile-first.' },
+          { icon: 'bi-image', title: 'Imagens', color: '#f59e0b', desc: 'Edição e otimização de imagens.' },
+        ].map(item => (
+          <div key={item.title} className="col-sm-6 col-lg-4">
+            <div className="card h-100 mv-card border-0 shadow-sm">
+              <div className="card-body d-flex align-items-start gap-3">
+                <i className={`bi ${item.icon} fs-2`} style={{ color: item.color }} />
+                <div>
+                  <h6 className="card-title mb-1">{item.title}</h6>
+                  <p className="card-text small text-muted mb-0">{item.desc}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
 
-      <h4>Conteúdos:</h4>
-      <ul style={{ paddingLeft: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-        <li>
-          <strong>HTML (Estruturação):</strong> Introdução à Web e criação de páginas estáticas. 
-          Linguagem de Marcação de Hipertexto HTML, marcações (tags), padrões e atributos. 
-          Parágrafos, negrito, itálico, alinhamentos, links, adição de imagens, vídeo, áudio, formulários, tabelas e divisões.
-        </li>
-        <li>
-          <strong>CSS (Estilização):</strong> Folha de estilo (CSS), seletores, formatação de texto, cores, fundo, bordas, 
-          espaçamentos, alinhamentos, largura, altura e técnicas de posicionamento de elementos.
-        </li>
-        <li>
-          <strong>Responsividade e Padrões:</strong> Conceitos e tipos de layouts aplicados a múltiplos dispositivos. 
-          Introdução e utilização de frameworks de apresentação (Front-End) e processos para validação do documento.
-        </li>
-      </ul>
-
-      <h4>Ferramentas e Tecnologias</h4>
-      <ul style={{ paddingLeft: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-        <li><strong>HTML</strong>: Linguagem de marcação moderna utilizada para a organização e estruturação lógica de conteúdos Web.</li>
-        <li><strong>CSS</strong>: Tecnologia para estilização visual, controle de apresentação e desenvolvimento de interfaces responsivas.</li>
-        <li><strong>Framework</strong>: Ferramenta e conjunto de padrões empregados para acelerar a criação de interfaces modernas e adaptativas.</li>
-      </ul>
+      <div className="mt-3 anim">
+        <a
+          href="https://tsi.td.utfpr.edu.br/sites/default/files/2023-08/PPC_TSI-TD_2022_v1.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn btn-outline-primary btn-sm"
+        >
+          <i className="bi bi-file-earmark-pdf me-1" />
+          Referência do conteúdo – PPC TSI
+        </a>
+      </div>
     </div>
   );
 }

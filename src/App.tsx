@@ -2,7 +2,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { SplitText } from "gsap/all";
 import { Routes, Route } from "react-router";
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 
 import Sidebar from "./components/Sidebar";
 
@@ -35,6 +35,29 @@ function App() {
   const toggleTema = useCallback(() => {
     setTema(t => t === 'claro' ? 'escuro' : 'claro');
   }, []);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+
+    const handleScroll = () => {
+      setVisible(document.documentElement.scrollTop > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    gsap.to("#back-to-top", {
+      opacity: visible ? 1 : 0,
+      pointerEvents: visible ? "auto" : "none",
+      duration: 0.3,
+      ease: "power2.out",
+    });
+  }, [visible]);
+
+  const handleClick = () => {
+    document.documentElement.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   useGSAP(() => {
     gsap.registerPlugin(SplitText);
@@ -98,7 +121,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Sobre />} />
           <Route path="/slides" element={<Slides />} />
-          
+
           <Route path="/front1" element={<Front1 />} />
           <Route path="/front1/html" element={<Html />} />
           <Route path="/front1/css" element={<Css />} />
@@ -121,6 +144,13 @@ function App() {
           <Route path="/ihc/heuristica" element={<Heuristica />} />
         </Routes>
       </main>
+      <button
+        id="back-to-top"
+        onClick={handleClick}
+        style={{ opacity: 1, pointerEvents: "none" }}
+      >
+        Inicio
+      </button>
     </div>
   );
 }

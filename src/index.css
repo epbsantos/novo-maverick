@@ -32,7 +32,7 @@
   --mv-text-muted: #94a3b8;
   --mv-link: #60a5fa;
   --mv-link-hover: #93c5fd;
-  --mv-accent: #60a5fa;
+  --mv-accent: #f7df0e;
   --mv-card-bg: #1e293b;
   --mv-card-border: #334155;
   --mv-heading: #f8fafc;
@@ -40,6 +40,42 @@
   --mv-badge-bg: #1e3a5f;
   --mv-badge-text: #93c5fd;
   --mv-code-bg: #0f172a;
+}
+
+/* Dark theme overrides for Bootstrap text utilities */
+.escuro .text-secondary,
+.escuro .text-muted {
+  color: var(--mv-text-muted) !important;
+}
+
+.escuro .btn-outline-info.text-dark {
+  color: #0dcaf0 !important;
+}
+
+.escuro .btn-outline-info.text-dark:hover {
+  color: #0f172a !important;
+}
+
+.escuro .btn-outline-warning.text-dark {
+  color: #ffc107 !important;
+}
+
+.escuro .btn-outline-warning.text-dark:hover {
+  color: #0f172a !important;
+}
+
+/* Alert styling overrides in dark theme */
+.escuro .alert-secondary,
+.escuro .alert-light {
+  background-color: var(--mv-card-bg);
+  border-color: var(--mv-card-border);
+  color: var(--mv-text);
+}
+
+.escuro .alert-info {
+  background-color: var(--mv-badge-bg);
+  border-color: var(--mv-card-border);
+  color: var(--mv-badge-text);
 }
 
 /* ============================================

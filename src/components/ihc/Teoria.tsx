@@ -40,7 +40,7 @@ function Teoria() {
                   { name: 'Consistência', desc: 'Padrões visuais e lógicos reconhecíveis.' }
                 ].map(p => (
                   <div key={p.name} className="col-6 mb-2">
-                    <strong className="d-block text-dark mb-1">{p.name}</strong>
+                    <strong className="d-block mb-1">{p.name}</strong>
                     <span className="small text-secondary">{p.desc}</span>
                   </div>
                 ))}
